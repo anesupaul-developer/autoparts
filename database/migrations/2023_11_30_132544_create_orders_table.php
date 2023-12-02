@@ -21,6 +21,7 @@ return new class extends Migration
             $table->decimal('total', 18);
             $table->softDeletes();
             $table->timestamps();
+            $table->unique(['order_number', 'part_number', 'reference']);
         });
     }
 

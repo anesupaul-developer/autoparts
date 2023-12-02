@@ -2,8 +2,10 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Imports\OrderImporter;
 use App\Filament\Resources\OrderResource\Pages;
 use App\Models\Order;
+use Filament\Actions\ImportAction;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -94,11 +96,10 @@ class OrderResource extends Resource
 
     public static function getPages(): array
     {
-        return ['index' => Pages\ListOrders::route('/'),];
-        //        return [
-        //            'index' => Pages\ListOrders::route('/'),
-        //            'create' => Pages\CreateOrder::route('/create'),
-        //            'edit' => Pages\EditOrder::route('/{record}/edit'),
-        //        ];
+        return [
+            'index' => Pages\ListOrders::route('/'),
+            'create' => Pages\CreateOrder::route('/create'),
+            'edit' => Pages\EditOrder::route('/{record}/edit'),
+        ];
     }
 }

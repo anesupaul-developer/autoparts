@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\OrderResource\Pages;
 
+use App\Filament\Imports\OrderImporter;
 use App\Filament\Resources\OrderResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
@@ -13,7 +14,11 @@ class ListOrders extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\ImportAction::make()
+                ->label('Import Orders')
+                ->importer(OrderImporter::class),
+            Actions\CreateAction::make()
+            ->label('New Order'),
         ];
     }
 }
