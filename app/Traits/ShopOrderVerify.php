@@ -22,6 +22,12 @@ trait ShopOrderVerify
                 ->then(fn (ShopOrder $shopOrder) => $shopOrder);
         });
 
-
+        static::updating(function ($model) {
+            Pipeline::send($model)
+                ->through([
+                    ShopOrderTotalCheck::class,
+                ])
+                ->then(fn (ShopOrder $shopOrder) => $shopOrder);
+        });
     }
 }
