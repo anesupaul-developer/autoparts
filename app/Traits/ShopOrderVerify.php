@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Exceptions\CannotDeleteRecord;
 use App\Models\ShopOrder;
 use App\Pipelines\ShopOrderAutoAllocate;
 use App\Pipelines\ShopOrderTotalCheck;
@@ -28,6 +29,12 @@ trait ShopOrderVerify
                     ShopOrderTotalCheck::class,
                 ])
                 ->then(fn (ShopOrder $shopOrder) => $shopOrder);
+        });
+
+        static::deleting(/**
+         * @throws CannotDeleteRecord
+         */ function ($model) {
+           throw new CannotDeleteRecord();
         });
     }
 }

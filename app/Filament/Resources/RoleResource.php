@@ -19,7 +19,7 @@ class RoleResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-lock-closed';
 
-    protected static ?string $navigationGroup = 'Security Settings';
+    protected static ?string $navigationGroup = 'Settings';
 
     public static function form(Form $form): Form
     {
