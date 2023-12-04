@@ -17,6 +17,6 @@ class Order extends Model
         'reference',
         'quantity',
         'price',
-        'total'
+        'total',
     ];
 }

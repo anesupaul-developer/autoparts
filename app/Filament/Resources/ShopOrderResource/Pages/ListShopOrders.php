@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\ShopOrderResource\Pages;
 
-use App\Filament\Imports\OrderImporter;
 use App\Filament\Imports\ShopOrderImporter;
 use App\Filament\Resources\ShopOrderResource;
 use Filament\Actions;
@@ -19,7 +18,7 @@ class ListShopOrders extends ListRecords
                 ->label('Import Shop Orders')
                 ->importer(ShopOrderImporter::class),
             Actions\CreateAction::make()
-            ->label('New Shop Order'),
+                ->label('New Shop Order'),
         ];
     }
 }

@@ -3,9 +3,9 @@
 namespace App\Filament\Imports;
 
 use App\Models\ShopOrder;
+use App\Utilities\ShopOrder as ShopOrderUtil;
 use Filament\Actions\Imports\ImportColumn;
 use Filament\Actions\Imports\Importer;
-use App\Utilities\ShopOrder as ShopOrderUtil;
 use Filament\Actions\Imports\Models\Import;
 
 class ShopOrderImporter extends Importer
@@ -18,25 +18,31 @@ class ShopOrderImporter extends Importer
         $additional = [];
 
         foreach ($shops as $shop) {
-            $additional [] = ImportColumn::make($shop)
+            $additional[] = ImportColumn::make($shop)
                 ->name($shop)
                 ->label(str($shop)->upper());
         }
 
         $columns = array_merge([
             ImportColumn::make('order_number')
-                ->label('Order Number'),
+                ->label('Order Number')
+                ->requiredMapping(),
             ImportColumn::make('part_number')
+                ->requiredMapping()
                 ->label('Part Number'),
             ImportColumn::make('reference')
-                ->label('Reference'),
+                ->label('Reference')
+                ->requiredMapping(),
             ImportColumn::make('quantity')
                 ->label('Quantity')
+                ->requiredMapping()
                 ->integer(),
             ImportColumn::make('price')
+                ->requiredMapping()
                 ->label('Price')
                 ->numeric(),
             ImportColumn::make('total')
+                ->requiredMapping()
                 ->label('Total')
                 ->numeric(),
         ], $additional);
@@ -44,9 +50,11 @@ class ShopOrderImporter extends Importer
         return array_merge($columns, [
             ImportColumn::make('suma')
                 ->label('Suma')
+                ->requiredMapping()
                 ->integer(),
             ImportColumn::make('package_size')
                 ->label('Min qty, pcs')
+                ->requiredMapping()
                 ->integer(),
             ImportColumn::make('comment')
                 ->label('Comment'),
@@ -65,10 +73,10 @@ class ShopOrderImporter extends Importer
 
     public static function getCompletedNotificationBody(Import $import): string
     {
-        $body = 'Your shop order import has completed and ' . number_format($import->successful_rows) . ' ' . str('row')->plural($import->successful_rows) . ' imported.';
+        $body = 'Your shop order import has completed and '.number_format($import->successful_rows).' '.str('row')->plural($import->successful_rows).' imported.';
 
         if ($failedRowsCount = $import->getFailedRowsCount()) {
-            $body .= ' ' . number_format($failedRowsCount) . ' ' . str('row')->plural($failedRowsCount) . ' failed to import.';
+            $body .= ' '.number_format($failedRowsCount).' '.str('row')->plural($failedRowsCount).' failed to import.';
         }
 
         return $body;

@@ -18,7 +18,7 @@ class ListOrders extends ListRecords
                 ->label('Import Orders')
                 ->importer(OrderImporter::class),
             Actions\CreateAction::make()
-            ->label('New Order'),
+                ->label('New Order'),
         ];
     }
 }

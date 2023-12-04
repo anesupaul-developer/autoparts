@@ -12,9 +12,9 @@ class ShopOrder
 
         $ignoreColumns = [
             'id', 'order_number', 'part_number', 'reference', 'quantity', 'price',
-            'total', 'suma', 'package_size', 'comment', 'deleted_at', 'created_at', 'updated_at'
+            'total', 'suma', 'package_size', 'comment', 'deleted_at', 'created_at', 'updated_at',
         ];
 
-        return array_diff($columns, $ignoreColumns);
+        return collect(array_diff($columns, $ignoreColumns))->sort()->toArray();
     }
 }
