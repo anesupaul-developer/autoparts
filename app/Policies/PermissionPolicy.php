@@ -13,7 +13,7 @@ class PermissionPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->hasAnyPermission(['can_access_security_settings']);
+        return true; //$user->hasAnyPermission(['can_access_security_settings']);
     }
 
     /**
@@ -21,7 +21,7 @@ class PermissionPolicy
      */
     public function view(User $user, Permission $permission): bool
     {
-        return $user->hasAnyPermission(['can_access_security_settings']);
+        return true; //$user->hasAnyPermission(['can_access_security_settings']);
     }
 
     /**
