@@ -5,6 +5,9 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ShopOrderResource\Pages;
 use App\Models\ShopOrder;
 use App\Utilities\ShopOrder as ShopOrderUtil;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -20,9 +23,53 @@ class ShopOrderResource extends Resource
 
     public static function form(Form $form): Form
     {
+        $items = ShopOrderUtil::shops();
+
+        $basicSection = [
+            TextInput::make('order_number')
+            ->label('Order Number'),
+            TextInput::make('part_number')
+                ->label('Part Number'),
+            TextInput::make('reference')
+                ->label('Reference'),
+        ];
+
+        $costSection = [
+            TextInput::make('quantity')
+                ->label('Quantity'),
+            TextInput::make('total')
+                ->label('Total'),
+            TextInput::make('price')
+                ->label('Price'),
+            TextInput::make('suma')
+                ->label('Suma'),
+            TextInput::make('package_size')
+                ->label('Package Size'),
+        ];
+
+        $shops = [];
+
+        foreach ($items as $shop) {
+            $shops[] = TextInput::make($shop)
+                ->label(str($shop)->upper());
+        }
+
         return $form
             ->schema([
-                //
+                Section::make('Details')
+                    ->description('Basic Order Information.')
+                    ->schema($basicSection)->columns(3),
+                Section::make('Costing')
+                    ->description('Order costing.')
+                    ->schema($costSection)->columns(5),
+                Section::make('Notes')
+                    ->description('Short note about the order.')
+                ->schema([Textarea::make('comment')->label('Comment')])
+                    ->columnSpanFull(),
+                Section::make('Shop Allocation')
+                    ->description('Allocation of items across group shops.')
+                    ->schema($shops)
+                    ->columns(5),
             ]);
     }
 
