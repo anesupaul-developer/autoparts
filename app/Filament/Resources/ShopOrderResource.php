@@ -5,7 +5,6 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ShopOrderResource\Pages;
 use App\Models\ShopOrder;
 use App\Utilities\ShopOrder as ShopOrderUtil;
-use Filament\Actions\Imports\ImportColumn;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -33,7 +32,7 @@ class ShopOrderResource extends Resource
         $allocation = [];
 
         foreach ($shops as $shop) {
-            $allocation[] =  Tables\Columns\TextColumn::make($shop)
+            $allocation[] = Tables\Columns\TextColumn::make($shop)
                 ->toggleable(isToggledHiddenByDefault: true)
                 ->label(str($shop)->upper());
         }
@@ -50,7 +49,7 @@ class ShopOrderResource extends Resource
             Tables\Columns\TextColumn::make('price')
                 ->label('Price'),
             Tables\Columns\TextColumn::make('total')
-                ->label('Total')
+                ->label('Total'),
         ];
 
         $data = array_merge(array_merge($initial, $allocation), [

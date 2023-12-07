@@ -16,7 +16,7 @@ class ShopOrderAutoAllocate
 
         foreach ($shops as $shop) {
             $val = $shopOrder->getAttribute($shop);
-            if (!is_numeric($val)) {
+            if (! is_numeric($val)) {
                 $total = $total - $step;
                 if ($total <= $step && $total > -1) {
                     $shopOrder->setAttribute($shop, $total);

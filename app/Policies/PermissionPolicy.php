@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Permission;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class PermissionPolicy
 {
@@ -13,7 +12,7 @@ class PermissionPolicy
      */
     public function viewAny(User $user): bool
     {
-        return true; //$user->hasAnyPermission(['can_access_security_settings']);
+        return $user->hasAnyPermission(['can_access_security_settings']);
     }
 
     /**
@@ -21,7 +20,7 @@ class PermissionPolicy
      */
     public function view(User $user, Permission $permission): bool
     {
-        return true; //$user->hasAnyPermission(['can_access_security_settings']);
+        return $user->hasAnyPermission(['can_access_security_settings']);
     }
 
     /**

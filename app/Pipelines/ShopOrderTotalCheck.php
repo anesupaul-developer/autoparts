@@ -21,8 +21,8 @@ class ShopOrderTotalCheck
 
         if ($total - intval($shopOrder->getAttribute('suma')) != 0 ||
             intval($shopOrder->getAttribute('quantity')) - intval($shopOrder->getAttribute('suma')) != 0) {
-            throw new Exception('Total is ' . $shopOrder->getAttribute('suma') .
-                ' but order totals is ' . $total. ' and order is '.$shopOrder->getAttribute('quantity'));
+            throw new Exception('Total is '.$shopOrder->getAttribute('suma').
+                ' but order totals is '.$total.' and order is '.$shopOrder->getAttribute('quantity'));
         }
 
         return $next($shopOrder);

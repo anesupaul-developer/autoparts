@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\ShopOrder;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class ShopOrderPolicy
 {
@@ -13,7 +12,7 @@ class ShopOrderPolicy
      */
     public function viewAny(User $user): bool
     {
-        return true;
+        return $user->hasAnyPermission(['can_edit_shop_order']);
     }
 
     /**
@@ -21,7 +20,7 @@ class ShopOrderPolicy
      */
     public function view(User $user, ShopOrder $shopOrder): bool
     {
-        return true;
+        return $user->hasAnyPermission(['can_edit_shop_order']);
     }
 
     /**
@@ -29,7 +28,7 @@ class ShopOrderPolicy
      */
     public function create(User $user): bool
     {
-        return true;
+        return $user->hasAnyPermission(['can_edit_shop_order']);;
     }
 
     /**
@@ -45,7 +44,7 @@ class ShopOrderPolicy
      */
     public function delete(User $user, ShopOrder $shopOrder): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -53,7 +52,7 @@ class ShopOrderPolicy
      */
     public function restore(User $user, ShopOrder $shopOrder): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -61,6 +60,6 @@ class ShopOrderPolicy
      */
     public function forceDelete(User $user, ShopOrder $shopOrder): bool
     {
-        return true;
+        return false;
     }
 }
